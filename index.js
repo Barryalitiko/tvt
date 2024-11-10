@@ -5,7 +5,7 @@ const { infoLog, bannerLog } = require("./src/utils/logger");
 async function start() {
   try {
     bannerLog();
-    infoLog("Krampus se está iniciando");
+    infoLog("Krampus se está iniciando...");
 
     const socket = await connect();
 
