@@ -9,7 +9,7 @@ exports.inputLog = (message) => {
 };
 
 exports.infoLog = (message) => {
-  console.log("\x1b[34m[KRAMPUS | INFO]\x1b[0m", message);
+  console.log("\x1b[31m[KRAMPUS | INFO]\x1b[0m", message);
 };
 
 exports.successLog = (message) => {
@@ -21,7 +21,7 @@ exports.errorLog = (message) => {
 };
 
 exports.warningLog = (message) => {
-  console.log("\x1b[33m[KRAMPUS | WARNING]\x1b[0m", message);
+  console.log("\x1b[33m[KRAMPUS | ADVERTENCIA]\x1b[0m", message);
 };
 
 exports.bannerLog = () => {
@@ -32,4 +32,5 @@ exports.bannerLog = () => {
   console.log(`\x1b[34m ██  ██▄    ██       ▄██▀▀▀██  ██ ██ ██\x1b[0m`);
   console.log(`\x1b[34m ██   ██▄   ██       ██▄▄▄███  ██ ██ ██\x1b[0m`);
   console.log(`\x1b[34m ▀▀    ▀▀   ▀▀        ▀▀▀▀ ▀▀  ▀▀ ▀▀ ▀▀\x1b[0m`);
+  console.log(`\x1b[31mby Barryalitiko\x1b[0m`);
 };
