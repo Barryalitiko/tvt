@@ -1,0 +1,22 @@
+{
+  "name": "krampus",
+  "version": "1.0.0",
+  "description": "Bot de prueba by Krampus",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Barryalitiko/Krampus.git"
+  },
+  "keywords": [
+    "krampus"
+  ],
+  "author": "krampus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Barryalitiko/Krampus/issues"
+  },
+  "homepage": "https://github.com/Barryalitiko/Krampus#readme"
+}
