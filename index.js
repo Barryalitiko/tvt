@@ -1,24 +1,37 @@
-const { default: makeWASocket } = require('@whiskeysockets/baileys');
-const qrcode = require('qrcode-terminal');
+const { makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
+const path = require('path');
+const qrcode = require('qrcode-terminal');  
 
-async function connectKrampus() {
-    const sock = makeWASocket();
-    
-    sock.ev.on('connection.update', (update) => {
-        const { connection, qr } = update;
-        if (qr) qrcode.generate(qr, { small: true });
-        if (connection === 'open') console.log('Krampus está conectado a WhatsApp');
+const sessionPath = path.join(__dirname, 'session');
+const { state, saveState } = useMultiFileAuthState(sessionPath);
+
+const connectKrampus = async () => {
+    const sock = makeWASocket({
+        auth: state, 
     });
 
-    sock.ev.on('messages.upsert', async ({ messages }) => {
-        const msg = messages[0];
-       
-        if (msg.message) {
-            console.log('Mensaje recibido:', msg);
-            
-            await sock.sendMessage(msg.key.remoteJid, { text: '¡Hola! Soy Krampus, tu bot de prueba.' });
-        }
+    sock.ev.on('qr', (qr) => {
+        console.log('Generando QR...');
+        qrcode.generate(qr, { small: true }); 
     });
-}
 
-connectKrampus();
+    sock.ev.on('open', () => {
+        console.log('Conexión establecida exitosamente!');
+    });
+
+    sock.ev.on('close', ({ reason }) => {
+        console.log('Conexión cerrada:', reason);
+    });
+
+    sock.ev.on('error', (error) => {
+        console.error('Error:', error);
+    });
+
+    sock.ev.on('auth-state.update', (authState) => {
+        saveState(authState); 
+    });
+
+    return sock;
+};
+
+connectKrampus().catch(console.error);
