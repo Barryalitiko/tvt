@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/Barryalitiko/Krampus/issues"
   },
-  "homepage": "https://github.com/Barryalitiko/Krampus#readme"
+  "homepage": "https://github.com/Barryalitiko/Krampus#readme",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.9",
+    "qrcode-terminal": "^0.12.0"
+  }
 }
