@@ -1,7 +1,7 @@
 const path = require("path");
 
 // Prefixo dos comandos.
-exports.PREFIX = "/";
+exports.PREFIX = "#";
 
 // Emoji do bot (mude se preferir).
 exports.BOT_EMOJI = "🦇";
@@ -25,7 +25,7 @@ exports.ASSETS_DIR = path.resolve(__dirname, "..", "assets");
 exports.TEMP_DIR = path.resolve(__dirname, "..", "assets", "temp");
 
 // Timeout em milissegundos por evento (evita banimento).
-exports.TIMEOUT_IN_MILLISECONDS_BY_EVENT = 700;
+exports.TIMEOUT_IN_MILLISECONDS_BY_EVENT = 600;
 
 // Plataforma de API's
 exports.SPIDER_API_BASE_URL = "https://api.spiderx.com.br/api";
