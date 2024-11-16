@@ -12,6 +12,7 @@ module.exports = {
 
     await sendReact("📢");
 
-    await sendText(`🦇 𝙷𝚎 𝚕𝚕𝚊𝚖𝚊𝚍𝚘 𝚊 𝚝𝚘𝚍𝚘𝚜!\n\n${fullArgs}`, mentions);
+    await sendText(``👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
+      𝙷𝚎 𝚕𝚕𝚊𝚖𝚊𝚍𝚘 𝚊 𝚝𝚘𝚍𝚘𝚜!\n\n${fullArgs}`, mentions);
   },
 };
