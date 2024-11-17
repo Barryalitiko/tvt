@@ -1,2 +1,2 @@
 # Krampus-BOT 
-![Murciélago](./assets/images/krampusbotprincipal)
+(./assets/images/krampusbotprincipal)
