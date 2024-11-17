@@ -24,8 +24,7 @@ ${PREFIX}ban (respondiendo a un mensaje)`,
   }) => {
     if (!args.length && !isReply) {
       throw new InvalidParameterError(
-        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-        Necesitas mencionar a la persona"
+        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 Necesitas mencionar a la persona"
       );
     }
 
@@ -33,20 +32,17 @@ ${PREFIX}ban (respondiendo a un mensaje)`,
     const memberToRemoveNumber = onlyNumbers(memberToRemoveJid);
 
     if (memberToRemoveNumber.length < 7 || memberToRemoveNumber.length > 15) {
-      throw new InvalidParameterError("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-                                     𝙽𝚞́𝚖𝚎𝚛𝚘 𝚗𝚘 𝚟𝚊𝚕𝚒𝚍𝚘");
+      throw new InvalidParameterError("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙽𝚞́𝚖𝚎𝚛𝚘 𝚗𝚘 𝚟𝚊𝚕𝚒𝚍𝚘");
     }
 
     if (memberToRemoveJid === userJid) {
-      throw new DangerError("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-                            𝙽𝚘 𝚜𝚎 𝚙𝚞𝚎𝚍𝚎 𝚛𝚎𝚊𝚕𝚒𝚣𝚊𝚛 𝚕𝚊 𝚊𝚌𝚌𝚒𝚘́𝚗");
+      throw new DangerError("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙽𝚘 𝚜𝚎 𝚙𝚞𝚎𝚍𝚎 𝚛𝚎𝚊𝚕𝚒𝚣𝚊𝚛 𝚕𝚊 𝚊𝚌𝚌𝚒𝚘́𝚗");
     }
 
     const botJid = toUserJid(BOT_NUMBER);
 
     if (memberToRemoveJid === botJid) {
-      throw new DangerError("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-                            𝙽𝚘 𝚜𝚎 𝚙𝚞𝚎𝚍𝚎 𝚛𝚎𝚊𝚕𝚒𝚣𝚊𝚛 𝚕𝚊 𝚊𝚌𝚌𝚒𝚘́𝚗");
+      throw new DangerError("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙽𝚘 𝚜𝚎 𝚙𝚞𝚎𝚍𝚎 𝚛𝚎𝚊𝚕𝚒𝚣𝚊𝚛 𝚕𝚊 𝚊𝚌𝚌𝚒𝚘́𝚗");
     }
 
     await socket.groupParticipantsUpdate(
@@ -57,7 +53,6 @@ ${PREFIX}ban (respondiendo a un mensaje)`,
 
     await sendSuccessReact();
 
-    await sendReply("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-                    𝙿𝚎𝚛𝚜𝚘𝚗𝚊 𝚛𝚎𝚖𝚘𝚟𝚒𝚍𝚊");
+    await sendReply("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙿𝚎𝚛𝚜𝚘𝚗𝚊 𝚛𝚎𝚖𝚘𝚟𝚒𝚍𝚊");
   },
 };
