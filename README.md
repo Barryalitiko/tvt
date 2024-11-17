@@ -11,3 +11,6 @@ Una idea generada por un grupo de amigos (OM, *Operación Marshall*) al conjunto
 https://t.me/krampusiano
 # <span style="color:green">༴༎CANAL DE WHATSAPP</span>
 https://whatsapp.com/channel/0029Vap2vVA3QxRxY4ZuD00k
+# ━━━━━━━⛥ 𝗢𝗠 ༴༎👻༎ ⛦━━━━━━━
+# Instalación
+<img alt="Version" src="https://img.shields.io/badge/en-android-green">
