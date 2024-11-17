@@ -24,8 +24,7 @@ exports.onGroupParticipantsUpdate = async ({
 
       await socket.sendMessage(remoteJid, {
         image: buffer,
-        caption: ` 👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-        𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘 𝚊𝚕 𝚐𝚛𝚞𝚙𝚘 @${onlyNumbers(userJid)}!`,
+        caption: ` 👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘 𝚊𝚕 𝚐𝚛𝚞𝚙𝚘 @${onlyNumbers(userJid)}!`,
         mentions: [userJid],
       });
 
@@ -34,8 +33,7 @@ exports.onGroupParticipantsUpdate = async ({
       }
     } catch (error) {
       warningLog(
-        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-        No se pudo enviar el mensaje de Bienvenida"
+        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 No se pudo enviar el mensaje de Bienvenida"
       );
     }
   }
