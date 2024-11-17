@@ -10,7 +10,7 @@ module.exports = {
 
     const mentions = participants.map(({ id }) => id);
 
-    await sendReact("📢");
+    await sendReact("👻");
 
     await sendText(``👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
       𝙷𝚎 𝚕𝚕𝚊𝚖𝚊𝚍𝚘 𝚊 𝚝𝚘𝚍𝚘𝚜!\n\n${fullArgs}`, mentions);
