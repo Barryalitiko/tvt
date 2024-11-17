@@ -21,8 +21,7 @@ module.exports = {
   }) => {
     if (!isImage && !isVideo) {
       throw new InvalidParameterError(
-        " 👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻
-        Marca o responde a una imagen para convertirla a sticker"
+        " 👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻 Marca o responde a una imagen para convertirla a sticker"
       );
     }
 
