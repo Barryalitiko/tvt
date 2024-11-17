@@ -16,7 +16,7 @@ module.exports = {
   }) => {
     if (!args.length) {
       throw new InvalidParameterError(
-        "👻 `𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝` 👻
+        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻
         Indicame el video que deseas descargar"
       );
     }
@@ -27,7 +27,7 @@ module.exports = {
       const data = await playVideo(args[0]);
 
       if (!data) {
-        await sendErrorReply("👻 `𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝` 👻
+        await sendErrorReply("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻
                              video no encontrado");
         return;
       }
