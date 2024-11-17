@@ -7,11 +7,11 @@ module.exports = {
   name: "ban",
   description: "Banear",
   commands: ["ban", "kick"],
-  usage: `${PREFIX}ban @marcar_membro 
+  usage: `${PREFIX}ban @marcar_miembro 
   
 ou 
 
-${PREFIX}ban (mencionando uma mensagem)`,
+${PREFIX}ban (respondiendo a un mensaje)`,
   handle: async ({
     args,
     isReply,
