@@ -12,7 +12,7 @@ module.exports = {
 
     if (!text) {
       throw new InvalidParameterError(
-        "`👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻`
+        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
         𝚑𝚊𝚣𝚖𝚎 𝚞𝚗𝚊 𝚙𝚛𝚎𝚐𝚞𝚗𝚝𝚊 𝚙𝚊𝚛𝚊 𝚙𝚘𝚍𝚎𝚛 𝚛𝚎𝚜𝚙𝚘𝚗𝚍𝚎𝚛"
       );
     }
