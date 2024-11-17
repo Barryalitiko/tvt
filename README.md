@@ -4,6 +4,6 @@
 Una idea generada por un grupo de amigos (OM, *Operación Marshall*) al conjunto de *Krampus B.*
 # ━━━━━━━━━━━━━━━━━━
 # <span style="color:blue">༴༎TELEGRAM</span>
-t.me/krampusiano
+https://t.me/krampusiano
 # <span style="color:green">༴༎CANAL DE WHATSAPP</span>
 https://whatsapp.com/channel/0029Vap2vVA3QxRxY4ZuD00k
