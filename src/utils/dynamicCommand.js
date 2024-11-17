@@ -37,8 +37,7 @@ exports.dynamicCommand = async (paramsHandler) => {
       await socket.groupParticipantsUpdate(remoteJid, [userJid], "remove");
 
       await sendReply(
-        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-        Kram tiene ordenes de no permitir links 🦇"
+        "Fue eliminado por enviar un link"
       );
 
       await socket.sendMessage(remoteJid, {
@@ -74,14 +73,14 @@ exports.dynamicCommand = async (paramsHandler) => {
 
   if (!(await checkPermission({ type, ...paramsHandler }))) {
     await sendErrorReply("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-                         No tienes permitido usar este comando");
+                         no tienes permiso para usar este comando");
     return;
   }
 
   if (!isActiveGroup(remoteJid) && command.name !== "on") {
     await sendWarningReply(
       "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-      Este grupo no está habilitado. Pida a algún admin que active Krampus"
+      este grupo esta desactivado, solicite al admin su activacion"
     );
 
     return;
@@ -100,10 +99,10 @@ exports.dynamicCommand = async (paramsHandler) => {
     } else if (error instanceof DangerError) {
       await sendErrorReply(error.message);
     } else {
-      errorLog("Error con el comando", error);
+      errorLog("Erro ao executar comando", error);
       await sendErrorReply(
         `👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-        Ocurrió un error al intentar usar el comando ${command.name}! Ya fue notificado!
+        Ocurrio un error con el comando ${command.name}! Ya ha sido notificado!
       
 📄 *Detalles*: ${error.message}`
       );
