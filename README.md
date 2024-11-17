@@ -1,6 +1,6 @@
 # Krampus-BOT 👻
 ![KrampusBotKram](./assets/images/krampusbotprincipal.jpg)
- <img alt="Version" src="https://img.shields.io/badge/V-1.1.0-purple">
+ <img alt="Version" src="https://img.shields.io/badge/Version-1.1.0-purple">
 # ━━━━━━━⛥ 𝗢𝗠 ༴༎👻༎ ⛦━━━━━━━
 Una idea generada por un grupo de amigos (OM, *Operación Marshall*) al conjunto de *Krampus B.*
 # ━━━━━━━━━━━━━━━━━━
