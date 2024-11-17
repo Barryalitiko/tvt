@@ -16,8 +16,7 @@ module.exports = {
     sendImageFromFile,
   }) => {
     if (!isSticker) {
-      throw new InvalidParameterError("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-                                      Envia el archivo para convertir a imagen");
+      throw new InvalidParameterError("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 Envia el archivo para convertir a imagen");
     }
 
     const inputPath = await downloadSticker(webMessage, "input");
