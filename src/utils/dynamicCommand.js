@@ -37,7 +37,7 @@ exports.dynamicCommand = async (paramsHandler) => {
       await socket.groupParticipantsUpdate(remoteJid, [userJid], "remove");
 
       await sendReply(
-        "Fue eliminado por enviar un link"
+        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 Baneado por enviar link"
       );
 
       await socket.sendMessage(remoteJid, {
@@ -72,15 +72,13 @@ exports.dynamicCommand = async (paramsHandler) => {
   }
 
   if (!(await checkPermission({ type, ...paramsHandler }))) {
-    await sendErrorReply("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-                         no tienes permiso para usar este comando");
+    await sendErrorReply("👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 No tienes permitido usar el comando");
     return;
   }
 
   if (!isActiveGroup(remoteJid) && command.name !== "on") {
     await sendWarningReply(
-      "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-      este grupo esta desactivado, solicite al admin su activacion"
+      "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 Grupo desactivado, contacte con el admin"
     );
 
     return;
@@ -93,16 +91,15 @@ exports.dynamicCommand = async (paramsHandler) => {
     });
   } catch (error) {
     if (error instanceof InvalidParameterError) {
-      await sendWarningReply(`Parâmetros inválidos! ${error.message}`);
+      await sendWarningReply(`Parametros inválidos! ${error.message}`);
     } else if (error instanceof WarningError) {
       await sendWarningReply(error.message);
     } else if (error instanceof DangerError) {
       await sendErrorReply(error.message);
     } else {
-      errorLog("Erro ao executar comando", error);
+      errorLog("Error al ejecutar el comando", error);
       await sendErrorReply(
-        `👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-        Ocurrio un error con el comando ${command.name}! Ya ha sido notificado!
+        `👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 Ocurrio un error al ejecutar el comando ${command.name}!
       
 📄 *Detalles*: ${error.message}`
       );
