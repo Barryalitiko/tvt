@@ -6,6 +6,7 @@
   
 # ━━━━━━━⛥ 𝗢𝗠 ༴༎👻༎ ⛦━━━━━━━
 Una idea generada por un grupo de amigos (OM, *Operación Marshall*) al conjunto de *Krampus B.*
+![KrampusBotKram](./assets/images/om.jpg)
 # ━━━━━━━━━━━━━━━━━━
 # <span style="color:blue">༴༎TELEGRAM</span>
 https://t.me/krampusiano
