@@ -15,8 +15,7 @@ module.exports = {
   }) => {
     if (!args.length) {
       throw new InvalidParameterError(
-        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻
-        Debe ingresar el texto que desea convertir en una pegatina"
+        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 Debe ingresar el texto que desea convertir en una pegatina"
       );
     }
 
