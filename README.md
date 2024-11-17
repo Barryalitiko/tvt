@@ -1,2 +1,2 @@
 # Krampus-BOT 
-(./assets/images/krampusbotprincipal.jpg)
+KrampusBotKram(./assets/images/krampusbotprincipal.jpg)
