@@ -10,7 +10,9 @@
 Una idea generada por un grupo de amigos (OM, *Operación Marshall*) al conjunto de *Krampus B.*
 ![KrampusBotKram](./assets/images/om.jpg)
 # ━━━━━━━━━━━━━━━━━━
-# <span style="color:blue">༴༎TELEGRAM</span>
+# <span style="color:blue">༴༎TELEGRAM</span> 
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="50" />
+
 https://t.me/krampusiano
 # <span style="color:green">༴༎CANAL DE WHATSAPP</span>
 https://whatsapp.com/channel/0029Vap2vVA3QxRxY4ZuD00k
