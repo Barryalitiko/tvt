@@ -32,3 +32,8 @@ termux-setup-storage
 ```
 
 3 - Clona el repositorio
+```sh
+https://github.com/Barryalitiko/KrampusBotKram.git
+```
+
+
