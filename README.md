@@ -11,8 +11,6 @@ Una idea generada por un grupo de amigos (OM, *Operación Marshall*) al conjunto
 ![KrampusBotKram](./assets/images/om.jpg)
 # ━━━━━━━━━━━━━━━━━━
 # <span style="color:blue">༴༎TELEGRAM</span>
-![Telegram Logo](https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg)
-
 https://t.me/krampusiano
 # <span style="color:green">༴༎CANAL DE WHATSAPP</span>
 https://whatsapp.com/channel/0029Vap2vVA3QxRxY4ZuD00k
