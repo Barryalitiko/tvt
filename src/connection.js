@@ -110,7 +110,7 @@ async function connect() {
             warningLog("Conexión prohibida!");
             break;
           case DisconnectReason.restartRequired:
-            infoLog("Krampus reiniciado! Inicia con "npm start".");
+            infoLog('Krampus reiniciado! Inicia con "npm start".');
             break;
           case DisconnectReason.unavailableService:
             warningLog("Servicio no disponible!");
