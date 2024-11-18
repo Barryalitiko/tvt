@@ -15,6 +15,8 @@ Una idea generada por un grupo de amigos (OM, *Operación Marshall*) al conjunto
 
 https://t.me/krampusiano
 # <span style="color:green">༴༎CANAL DE WHATSAPP</span>
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="50" />
+
 https://whatsapp.com/channel/0029Vap2vVA3QxRxY4ZuD00k
 # ━━━━━━━⛥ 𝗢𝗠 ༴༎👻༎ ⛦━━━━━━━
 # Instalación
