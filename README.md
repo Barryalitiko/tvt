@@ -30,3 +30,5 @@ pkg upgrade -y && pkg update -y && pkg install git -y
 ```sh
 termux-setup-storage
 ```
+
+3 - Clona el repositorio
