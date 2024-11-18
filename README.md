@@ -2,7 +2,7 @@
 ![KrampusBotKram](./assets/images/krampusbotprincipal.jpg)
 <div align="center">
  <img alt="Version" src="https://img.shields.io/badge/Version-1.1.0-purple">
-  <img alt="Version" src="https://img.shields.io/badge/by-Krampus-purple">
+  <img alt="Version" src="https://img.shields.io/badge/by-Krampus-yellow">
   <img alt="Version" src="https://img.shields.io/badge/OM-OperacionMarshall-red">
   </div>
   
