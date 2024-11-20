@@ -9,7 +9,7 @@ module.exports = {
   name: "link",
   description: "Activa o desactiva los links",
   commands: ["nolink"],
-  usage: `${PREFIX}link (s/n)`,
+  usage: `${PREFIX}link (1/0)`,
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
     if (!args.length) {
       throw new InvalidParameterError(
