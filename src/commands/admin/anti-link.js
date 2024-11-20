@@ -13,7 +13,7 @@ module.exports = {
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
     if (!args.length) {
       throw new InvalidParameterError(
-        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻 𝙰𝚗̃𝚊𝚍𝚎 𝚓𝚞𝚗𝚝𝚘 𝚊𝚕 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 𝚕𝚒𝚗𝚔 *𝚜* (𝚙𝚊𝚛𝚊 𝚎𝚗𝚌𝚎𝚗𝚍𝚎𝚛) 𝚘 *𝚗* (𝚙𝚊𝚛𝚊 𝚊𝚙𝚊𝚐𝚊𝚛).
+        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻 𝙰𝚗̃𝚊𝚍𝚎 𝚓𝚞𝚗𝚝𝚘 𝚊𝚕 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 𝚕𝚒𝚗𝚔 S 𝚙𝚊𝚛𝚊 𝚎𝚗𝚌𝚎𝚗𝚍𝚎r o N 𝚙𝚊𝚛𝚊 𝚊𝚙𝚊𝚐𝚊𝚛.
 "
       );
     }
@@ -23,7 +23,7 @@ module.exports = {
 
     if (!antiLinkOn && !antiLinkOff) {
       throw new InvalidParameterError(
-        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻 𝙰𝚗̃𝚊𝚍𝚎 𝚓𝚞𝚗𝚝𝚘 𝚊𝚕 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 𝚕𝚒𝚗𝚔 𝚜 (𝚙𝚊𝚛𝚊 𝚎𝚗𝚌𝚎𝚗𝚍𝚎𝚛) 𝚘 𝚗 (𝚙𝚊𝚛𝚊 𝚊𝚙𝚊𝚐𝚊𝚛)."
+        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻 𝙰𝚗̃𝚊𝚍𝚎 𝚓𝚞𝚗𝚝𝚘 𝚊𝚕 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 𝚕𝚒𝚗𝚔 S 𝚙𝚊𝚛𝚊 𝚎𝚗𝚌𝚎𝚗𝚍𝚎𝚛 𝚘 N 𝚙𝚊𝚛𝚊 𝚊𝚙𝚊𝚐𝚊𝚛."
       );
     }
 
