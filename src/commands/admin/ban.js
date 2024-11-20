@@ -11,7 +11,7 @@ module.exports = {
   
 ou 
 
-${PREFIX}ban (respondiendo a un mensaje)`,
+${PREFIX}ban respondiendo a un mensaje`,
   handle: async ({
     args,
     isReply,
