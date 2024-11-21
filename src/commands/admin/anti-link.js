@@ -13,7 +13,7 @@ module.exports = {
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
     if (!args.length) {
       throw new InvalidParameterError(
-        "👻Krampus.bot👻 Activa con 1 o 0 (conectar o desconectar)!"
+        "👻 Krampus.bot 👻 Activa con 1 o 0 (conectar o desconectar)!"
       );
     }
 
