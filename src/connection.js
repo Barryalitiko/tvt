@@ -61,15 +61,15 @@ async function connect() {
   });
 
   if (!socket.authState.creds.registered) {
-    warningLog("Credencial aún sin configurar...");
+    warningLog("Credenciales no configuradas!");
 
-    infoLog('Ingrese su número de telefono sin el + (ejemplo: "27734375775"):');
+    infoLog('Ingrese su numero sin el + (ejemplo: "13733665556"):');
 
-    const phoneNumber = await question("Ingrese su número de teléfono: ");
+    const phoneNumber = await question("Ingresa el numero: ");
 
     if (!phoneNumber) {
       errorLog(
-        'Número de teléfono inválido! Intenta nuevamente con el comando "npm start".'
+        'Numero de telefono inválido! Reinicia con el comando "npm start".'
       );
 
       process.exit(1);
@@ -77,7 +77,7 @@ async function connect() {
 
     const code = await socket.requestPairingCode(onlyNumbers(phoneNumber));
 
-    sayLog(`Código de emparejamiento: ${code}`);
+    sayLog(`Código de pareamento: ${code}`);
   }
 
   socket.ev.on("connection.update", async (update) => {
@@ -88,29 +88,29 @@ async function connect() {
         lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut;
 
       if (statusCode === DisconnectReason.loggedOut) {
-        errorLog("Krampus está desconectado!");
+        errorLog("Bot desconectado!");
       } else {
         switch (statusCode) {
           case DisconnectReason.badSession:
-            warningLog("Sección inválida!");
+            warningLog("Sesion inválida!");
             break;
           case DisconnectReason.connectionClosed:
-            warningLog("Conexión cerrada!");
+            warningLog("Conexion cerrada!");
             break;
           case DisconnectReason.connectionLost:
-            warningLog("Conexión perdida!");
+            warningLog("Conexion perdida!");
             break;
           case DisconnectReason.connectionReplaced:
-            warningLog("Conexión de reemplazo!");
+            warningLog("Conexion de reemplazo!");
             break;
           case DisconnectReason.multideviceMismatch:
             warningLog("Dispositivo incompatible!");
             break;
           case DisconnectReason.forbidden:
-            warningLog("Conexión prohibida!");
+            warningLog("Conexion prohibida!");
             break;
           case DisconnectReason.restartRequired:
-            infoLog('Krampus reiniciado! Inicia con "npm start".');
+            infoLog('Krampus reiniciado! Reinicia con "npm start".');
             break;
           case DisconnectReason.unavailableService:
             warningLog("Servicio no disponible!");
@@ -119,11 +119,11 @@ async function connect() {
 
         const newSocket = await connect();
         load(newSocket);
-      }o
+      }
     } else if (connection === "open") {
-      successLog("Krampus ha sido iniciado!");
+      successLog("Krampus ha sido conectado");
     } else {
-      infoLog("Actualizando conexión...");
+      infoLog("Actualizando conexion...");
     }
   });
 
