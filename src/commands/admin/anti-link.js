@@ -6,15 +6,14 @@ const {
 } = require("../../utils/database");
 
 module.exports = {
-  name: "link",
-  description: "Activa o desactiva los links",
-  commands: ["nolink"],
-  usage: `${PREFIX}link (1/0)`,
+  name: "anti-link",
+  description: "Activa/desactiva el recurso de anti-link en el grupo.",
+  commands: ["anti-link"],
+  usage: `${PREFIX}anti-link (1/0)`,
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
     if (!args.length) {
       throw new InvalidParameterError(
-        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻 𝙰𝚗̃𝚊𝚍𝚎 𝚓𝚞𝚗𝚝𝚘 𝚊𝚕 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 𝚕𝚒𝚗𝚔 1 𝚙𝚊𝚛𝚊 𝚎𝚗𝚌𝚎𝚗𝚍𝚎r o 0 𝚙𝚊𝚛𝚊 𝚊𝚙𝚊𝚐𝚊𝚛.
-"
+        "👻Krampus.bot👻 Activa con 1 o 0 (conectar o desconectar)!"
       );
     }
 
@@ -23,7 +22,7 @@ module.exports = {
 
     if (!antiLinkOn && !antiLinkOff) {
       throw new InvalidParameterError(
-        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻 𝙰𝚗̃𝚊𝚍𝚎 𝚓𝚞𝚗𝚝𝚘 𝚊𝚕 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 𝚕𝚒𝚗𝚔 1 𝚙𝚊𝚛𝚊 𝚎𝚗𝚌𝚎𝚗𝚍𝚎𝚛 𝚘 0 𝚙𝚊𝚛𝚊 𝚊𝚙𝚊𝚐𝚊𝚛."
+        "👻Krampus.bot👻 Activa con 1 o 0 (conectar o desconectar)!"
       );
     }
 
@@ -35,8 +34,8 @@ module.exports = {
 
     await sendSuccessReact();
 
-    const context = antiLinkOn ? "👻 𝙰𝚌𝚝𝚒𝚟𝚊𝚍𝚘s" : "👻 𝙳𝚎𝚜𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘s";
+    const context = antiLinkOn ? "activado" : "desactivado";
 
-    await sendReply(`Los links se encuentran ${context}`);
+    await sendReply(`El anti-link ha sido ${context}!`);
   },
 };
