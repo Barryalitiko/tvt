@@ -6,9 +6,9 @@ const { exec } = require("child_process");
 
 module.exports = {
   name: "sticker",
-  description: "Convierte stickers",
+  description: "COonvierte en sticker imagen/gif/vídeo",
   commands: ["s", "sticker"],
-  usage: `${PREFIX}sticker (etiqueta la imagen) ou ${PREFIX}sticker (responda a la imagen)`,
+  usage: `${PREFIX}sticker (etiqueta imagen/gif/vídeo) o ${PREFIX}sticker (responde a imagen/gif/vídeo)`,
   handle: async ({
     isImage,
     isVideo,
@@ -21,7 +21,7 @@ module.exports = {
   }) => {
     if (!isImage && !isVideo) {
       throw new InvalidParameterError(
-        "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜B𝚘𝚝 👻 Marca o responde a una imagen para convertirla a sticker"
+        "👻 Krampus 👻 Debes marcar imagen/gif/vídeo o responder a una imagen/gif/vídeo"
       );
     }
 
@@ -62,7 +62,9 @@ module.exports = {
       if (!haveSecondsRule) {
         fs.unlinkSync(inputPath);
 
-        await sendErrorReply(`El video que etiquetaste dura mas de ${sizeInSeconds} segundos!`);
+        await sendErrorReply(`El video es muy largo, tiene ${sizeInSeconds} segundos!
+
+Envialo mas corto!`);
 
         return;
       }
