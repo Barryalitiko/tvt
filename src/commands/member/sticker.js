@@ -6,8 +6,8 @@ const { exec } = require("child_process");
 
 module.exports = {
   name: "sticker",
-  description: "COonvierte en sticker imagen/gif/vídeo",
-  commands: ["s", "sticker"],
+  description: "Faço figurinhas de imagem/gif/vídeo",
+  commands: ["s", "sticker", "fig", "f"],
   usage: `${PREFIX}sticker (etiqueta imagen/gif/vídeo) o ${PREFIX}sticker (responde a imagen/gif/vídeo)`,
   handle: async ({
     isImage,
@@ -62,9 +62,9 @@ module.exports = {
       if (!haveSecondsRule) {
         fs.unlinkSync(inputPath);
 
-        await sendErrorReply(`El video es muy largo, tiene ${sizeInSeconds} segundos!
+        await sendErrorReply(`👻 Krampus 👻Este video tiene mas de ${sizeInSeconds} segundos!
 
-Envialo mas corto!`);
+Envia un video mas corto!`);
 
         return;
       }
