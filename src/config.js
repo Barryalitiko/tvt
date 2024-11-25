@@ -10,7 +10,7 @@ exports.BOT_EMOJI = "🦇";
 exports.BOT_NAME = "Krampus Bot";
 
 // Número do bot. Coloque o número do bot (apenas números).
-exports.BOT_NUMBER = "27734375775";
+exports.BOT_NUMBER = "17373665556";
 
 // Número do dono do bot. Coloque o número do dono do bot (apenas números).
 exports.OWNER_NUMBER = "27734375775";
