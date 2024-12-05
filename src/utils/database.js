@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const databasePath = path.resolve(__dirname, "..", "..", "database");
 
-const INACTIVE_GROUPS_FILE = "inactive-groups";
+const INACTIVE_GROUPS_FILE = "inactive-groups"; // Usamos una sola constante para los grupos inactivos
 const NOT_WELCOME_GROUPS_FILE = "not-welcome-groups";
 const INACTIVE_AUTO_RESPONDER_GROUPS_FILE = "inactive-auto-responder-groups";
 const ANTI_LINK_GROUPS_FILE = "anti-link-groups";
@@ -30,8 +30,9 @@ function writeJSON(jsonFile, data) {
   fs.writeFileSync(fullPath, JSON.stringify(data));
 }
 
+// Funciones para manejar los grupos inactivos
 exports.activateGroup = (groupId) => {
-  const filename = INACTIVE_GROUPS_FILE;
+  const filename = INACTIVE_GROUPS_FILE;  // Usamos la constante única para grupos inactivos
 
   const inactiveGroups = readJSON(filename);
 
@@ -47,7 +48,7 @@ exports.activateGroup = (groupId) => {
 };
 
 exports.deactivateGroup = (groupId) => {
-  const filename = INACTIVE_GROUPS_FILE;
+  const filename = INACTIVE_GROUPS_FILE;  // Usamos la constante única para grupos inactivos
 
   const inactiveGroups = readJSON(filename);
 
@@ -59,13 +60,14 @@ exports.deactivateGroup = (groupId) => {
 };
 
 exports.isActiveGroup = (groupId) => {
-  const filename = INACTIVE_GROUPS_FILE;
+  const filename = INACTIVE_GROUPS_FILE;  // Usamos la constante única para grupos inactivos
 
   const inactiveGroups = readJSON(filename);
 
   return !inactiveGroups.includes(groupId);
 };
 
+// Funciones para manejar los grupos no bienvenidos
 exports.activateWelcomeGroup = (groupId) => {
   const filename = NOT_WELCOME_GROUPS_FILE;
 
@@ -102,6 +104,7 @@ exports.isActiveWelcomeGroup = (groupId) => {
   return !notWelcomeGroups.includes(groupId);
 };
 
+// Funciones para manejar el auto-responder
 exports.getAutoResponderResponse = (match) => {
   const filename = "auto-responder";
 
@@ -156,6 +159,7 @@ exports.isActiveAutoResponderGroup = (groupId) => {
   return !inactiveAutoResponderGroups.includes(groupId);
 };
 
+// Funciones para manejar los grupos con anti-link
 exports.activateAntiLinkGroup = (groupId) => {
   const filename = ANTI_LINK_GROUPS_FILE;
 
