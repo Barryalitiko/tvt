@@ -1,9 +1,9 @@
 const { PREFIX } = require("../../config");
 const { InvalidParameterError } = require("../../errors/InvalidParameterError");
 const {
-  activateGroup,
-  deactivateGroup,
-  isActiveGroup
+  activateGrupoGroup,    // Cambiado de activateGroup
+  deactivateGrupoGroup,  // Cambiado de deactivateGroup
+  isActiveGrupoGroup     // Cambiado de isActiveGroup
 } = require("../../utils/database");
 
 module.exports = {
@@ -28,9 +28,9 @@ module.exports = {
     }
 
     if (groupOn) {
-      activateGroup(remoteJid);
+      activateGrupoGroup(remoteJid);  // Cambiado aquí
     } else {
-      deactivateGroup(remoteJid);
+      deactivateGrupoGroup(remoteJid);  // Cambiado aquí
     }
 
     await sendSuccessReact();
