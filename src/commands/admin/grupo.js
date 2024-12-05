@@ -1,5 +1,3 @@
-// comando grupo.js
-
 const { PREFIX } = require("../../config");
 const { InvalidParameterError } = require("../../errors/InvalidParameterError");
 const { setGroupPermissions } = require("../../services/baileys");
@@ -12,29 +10,28 @@ module.exports = {
   usage: `${PREFIX}grupo (1/0)`,
 
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
-    // Pasamos el contexto del comando al middleware para validación
+    // Validar los argumentos y el grupo antes de proceder
     await validateGrupo({ args, remoteJid }, async () => {
-      // Si pasa la validación, procedemos con la lógica del comando
+      // Conectar a Baileys antes de ejecutar la acción
+      await connectBaileys();
+
+      // Comprobar si el argumento es 1 (activar) o 0 (desactivar)
       const groupOn = args[0] === "1";
       const groupOff = args[0] === "0";
 
-      // Activar o desactivar los permisos de mensajes en el grupo según la opción
-      try {
-        if (groupOn) {
-          await setGroupPermissions(remoteJid, true);  // Permitir mensajes
-        } else if (groupOff) {
-          await setGroupPermissions(remoteJid, false); // Deshabilitar mensajes
-        }
-
-        await sendSuccessReact();
-
-        const context = groupOn ? "permitido" : "deshabilitado";
-
-        await sendReply(`👻 Krampus.bot 👻 El permiso para que los miembros envíen mensajes ha sido ${context} con éxito!`);
-      } catch (error) {
-        console.error("Error al cambiar los permisos del grupo: ", error);
-        await sendReply("👻 Krampus.bot 👻 Hubo un error al cambiar los permisos del grupo.");
+      // Cambiar los permisos del grupo
+      if (groupOn) {
+        await setGroupPermissions(remoteJid, true); // Activar mensajes para todos
+      } else if (groupOff) {
+        await setGroupPermissions(remoteJid, false); // Desactivar mensajes para todos
+      } else {
+        await sendReply("Por favor, usa 1 para activar o 0 para desactivar los permisos de mensajes.");
+        return;
       }
+
+      await sendSuccessReact();
+      const context = groupOn ? "permitido" : "deshabilitado";
+      await sendReply(`👻 Krampus.bot 👻 El permiso para que los miembros envíen mensajes ha sido ${context} con éxito!`);
     });
   },
 };
