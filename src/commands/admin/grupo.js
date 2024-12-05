@@ -1,10 +1,11 @@
 const { PREFIX } = require("../../config");
 const { InvalidParameterError } = require("../../errors/InvalidParameterError");
 const {
-  activateGrupoGroup,    // Cambiado de activateGroup
-  deactivateGrupoGroup,  // Cambiado de deactivateGroup
-  isActiveGrupoGroup     // Cambiado de isActiveGroup
+  activateGroup,
+  deactivateGroup,
+  isActiveGroup
 } = require("../../utils/database");
+const validateGrupoGroup = require("../../middlewares/validateGrupoGroup");
 
 module.exports = {
   name: "grupo",
@@ -12,6 +13,9 @@ module.exports = {
   commands: ["grupo"],
   usage: `${PREFIX}grupo (1/0)`,
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
+    // Aplica el middleware de validación
+    await validateGrupoGroup({ remoteJid }, () => {});
+
     if (!args.length) {
       throw new InvalidParameterError(
         "👻 Krampus.bot 👻 Activa con 1 o 0 (conectar o desconectar)!"
@@ -28,9 +32,9 @@ module.exports = {
     }
 
     if (groupOn) {
-      activateGrupoGroup(remoteJid);  // Cambiado aquí
+      activateGroup(remoteJid);
     } else {
-      deactivateGrupoGroup(remoteJid);  // Cambiado aquí
+      deactivateGroup(remoteJid);
     }
 
     await sendSuccessReact();
