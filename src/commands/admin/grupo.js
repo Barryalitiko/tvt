@@ -1,32 +1,65 @@
 const { PREFIX } = require("../../config");
 const { InvalidParameterError } = require("../../errors/InvalidParameterError");
-const { isAdmin } = require("../../utils/database");  // Asumiendo que tienes una función para verificar si un usuario es admin
-const { setGroupPermission } = require("../../services/baileys"); // Función de servicio para cambiar permisos de grupo
+const {
+  activateGroup,
+  deactivateGroup,
+  isActiveGroup,
+  isActiveGrupoGroup
+} = require("../../utils/database");
+const validateGrupo = require("../../middlewares/validateGrupo");
+const baileys = require('baileys');
 
 module.exports = {
   name: "grupo",
   description: "Activa o desactiva la opción de que los miembros hablen en el grupo.",
   commands: ["grupo"],
-  usage: `${PREFIX}grupo (1/0)`, // 1 para permitir hablar, 0 para desactivar
+  usage: `${PREFIX}grupo (1/0)`,
 
-  handle: async ({ args, sendReply, sendSuccessReact, remoteJid, sender }) => {
-    if (!args.length) {
-      throw new InvalidParameterError("👻 Krampus.bot 👻 Usa 1 para activar o 0 para desactivar!");
-    }
+  // Manejo del comando
+  handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
+    // Llamamos al middleware para la validación
+    await validateGrupo({ args, remoteJid }, async () => {
+      // Validamos que se haya pasado el argumento correcto (1 o 0)
+      if (!args.length) {
+        throw new InvalidParameterError(
+          "👻 Krampus.bot 👻 Activa con 1 o 0 (permitir o no permitir hablar)!"
+        );
+      }
 
-    const allowTalking = args[0] === "1"; // Si es 1, permitir hablar; si es 0, desactivar
-    const groupAdmin = await isAdmin(remoteJid, sender); // Verificamos si el usuario que ejecuta el comando es admin
+      const groupOn = args[0] === "1";
+      const groupOff = args[0] === "0";
 
-    if (!groupAdmin) {
-      throw new InvalidParameterError("👻 Krampus.bot 👻 Solo los administradores pueden ejecutar este comando.");
-    }
+      if (!groupOn && !groupOff) {
+        throw new InvalidParameterError(
+          "👻 Krampus.bot 👻 Activa con 1 o 0 (permitir o no permitir hablar)!"
+        );
+      }
 
-    // Usamos la función setGroupPermission para cambiar los permisos en el grupo
-    await setGroupPermission(remoteJid, allowTalking);
+      // Función para gestionar los permisos de los miembros del grupo
+      async function manageGroupPermissions(client, groupId, action) {
+        try {
+          const groupMetadata = await client.groupMetadata(groupId);
+          const participants = groupMetadata.participants.map(p => p.id);
 
-    await sendSuccessReact();
-    const context = allowTalking ? "habilitado" : "deshabilitado";
+          if (action === '0') {
+            // Deshabilitar que los miembros puedan hablar
+            await client.groupParticipantsUpdate(groupId, participants, 'remove');
+          } else if (action === '1') {
+            // Permitir que los miembros puedan hablar
+            await client.groupParticipantsUpdate(groupId, participants, 'add');
+          }
+        } catch (error) {
+          console.error("Error al actualizar permisos del grupo:", error);
+        }
+      }
 
-    await sendReply(`👻 Krampus.bot 👻 Los miembros ahora pueden ${context} hablar en el grupo.`);
+      // Usamos la función para gestionar los permisos del grupo
+      await manageGroupPermissions(remoteJid, groupOn ? '1' : '0');
+
+      // Reaccionamos con éxito y enviamos la respuesta
+      await sendSuccessReact();
+      const context = groupOn ? "permitido" : "no permitido";
+      await sendReply(`👻 Krampus.bot 👻 Los miembros pueden hablar ahora: ${context}`);
+    });
   },
 };
