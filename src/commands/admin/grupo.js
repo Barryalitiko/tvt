@@ -28,11 +28,15 @@ module.exports = {
 
       await sendSuccessReact();
       const context = groupOn ? "permitido" : "deshabilitado";
-      await sendReply(`👻 Krampus.bot 👻 El permiso para que los miembros envíen mensajes ha sido ${context} con éxito!`);
+      await sendReply(`👻 Krampus.bot 👻 El permiso para que los miembros envíen mensajes ha sido ${context} con éxito en este grupo!`);
 
     } catch (error) {
       console.error(error);
-      await sendReply("👻 Krampus.bot 👻 Ocurrió un error al intentar cambiar los permisos.");
+      if (error.message.includes("insufficient")) {
+        await sendReply("👻 Krampus.bot 👻 No tienes permisos suficientes para cambiar los ajustes de este grupo.");
+      } else {
+        await sendReply("👻 Krampus.bot 👻 Ocurrió un error al intentar cambiar los permisos.");
+      }
     }
   },
 };
