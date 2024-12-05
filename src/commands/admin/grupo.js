@@ -1,44 +1,42 @@
 const { PREFIX } = require("../../config");
 const { InvalidParameterError } = require("../../errors/InvalidParameterError");
 const {
-  openGroup,
-  closeGroup
+  activateGroup,
+  deactivateGroup,
+  isActiveGroup
 } = require("../../utils/database");
 
 module.exports = {
   name: "grupo",
-  description: "Abre o cierra el grupo.",
+  description: "Activa o desactiva un grupo para la funcionalidad del bot.",
   commands: ["grupo"],
-  usage: `${PREFIX}grupo (0/1)`,
+  usage: `${PREFIX}grupo (1/0)`,
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
-    if (!args.length || (args[0] !== "0" && args[0] !== "1")) {
+    if (!args.length) {
       throw new InvalidParameterError(
-        "👻 Krampus.bot 👻 Usa '0' para abrir el grupo o '1' para cerrarlo!"
+        "👻 Krampus.bot 👻 Activa con 1 o 0 (conectar o desconectar)!"
       );
     }
 
-    // Verificamos si el usuario tiene permisos de administrador
-    // Este paso solo es necesario si tu lógica requiere control sobre permisos.
-    // Si ya se gestiona en otro middleware, puedes quitarlo
-    const isAdmin = await checkPermission({
-      type: "admin",
-      socket,
-      userJid,
-      remoteJid
-    });
+    const groupOn = args[0] === "1";
+    const groupOff = args[0] === "0";
 
-    if (!isAdmin) {
-      throw new Error("No tienes permisos para realizar esta acción.");
+    if (!groupOn && !groupOff) {
+      throw new InvalidParameterError(
+        "👻Krampus.bot👻 Activa con 1 o 0 (conectar o desconectar)!"
+      );
     }
 
-    const groupAction = args[0] === "1" ? closeGroup : openGroup;
-
-    await groupAction(remoteJid);
+    if (groupOn) {
+      activateGroup(remoteJid);
+    } else {
+      deactivateGroup(remoteJid);
+    }
 
     await sendSuccessReact();
 
-    const context = args[0] === "1" ? "cerrado" : "abierto";
+    const context = groupOn ? "activado" : "desactivado";
 
-    await sendReply(`El grupo ha sido ${context} con éxito!`);
-  }
+    await sendReply(`El grupo ha sido ${context}!`);
+  },
 };
