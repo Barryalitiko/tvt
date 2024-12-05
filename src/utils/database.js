@@ -105,41 +105,41 @@ exports.isActiveWelcomeGroup = (groupId) => {
   return !notWelcomeGroups.includes(groupId);
 };
 
-// Funciones para manejar los grupos de tipo "grupo"
-exports.activateGrupoGroup = (groupId) => {
-  const filename = NOT_GRUPO_GROUPS_FILE;
+// Funciones para manejar los permisos de mensaje de grupo
+exports.activateGroupMessages = (groupId) => {
+  const filename = NOT_GRUPO_GROUPS_FILE; // Podrías usar otro archivo específico si lo prefieres
 
-  const notGrupoGroups = readJSON(filename);
+  const noMessageGroups = readJSON(filename);
 
-  const index = notGrupoGroups.indexOf(groupId);
+  const index = noMessageGroups.indexOf(groupId);
 
   if (index === -1) {
     return;
   }
 
-  notGrupoGroups.splice(index, 1);
+  noMessageGroups.splice(index, 1);
 
-  writeJSON(filename, notGrupoGroups);
+  writeJSON(filename, noMessageGroups);
 };
 
-exports.deactivateGrupoGroup = (groupId) => {
-  const filename = NOT_GRUPO_GROUPS_FILE;
+exports.deactivateGroupMessages = (groupId) => {
+  const filename = NOT_GRUPO_GROUPS_FILE; // Podrías usar otro archivo específico si lo prefieres
 
-  const notGrupoGroups = readJSON(filename);
+  const noMessageGroups = readJSON(filename);
 
-  if (!notGrupoGroups.includes(groupId)) {
-    notGrupoGroups.push(groupId);
+  if (!noMessageGroups.includes(groupId)) {
+    noMessageGroups.push(groupId);
   }
 
-  writeJSON(filename, notGrupoGroups);
+  writeJSON(filename, noMessageGroups);
 };
 
-exports.isActiveGrupoGroup = (groupId) => {
-  const filename = NOT_GRUPO_GROUPS_FILE;
+exports.isGroupMessagesActive = (groupId) => {
+  const filename = NOT_GRUPO_GROUPS_FILE; // Podrías usar otro archivo específico si lo prefieres
 
-  const notGrupoGroups = readJSON(filename);
+  const noMessageGroups = readJSON(filename);
 
-  return !notGrupoGroups.includes(groupId);
+  return !noMessageGroups.includes(groupId);
 };
 
 // Funciones para manejar el auto-responder
