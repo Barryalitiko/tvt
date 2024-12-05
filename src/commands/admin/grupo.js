@@ -5,7 +5,7 @@ const {
   deactivateGroupMessages,
   isGroupMessagesActive
 } = require("../../utils/database");
-const { setGroupPermissions } = require("../../utils/baileys"); // Función para manipular los permisos de grupo con Baileys.
+const { setGroupPermissions } = require("../../utils/baileys"); // Ajustado para importar Baileys
 const validateGrupo = require("../../middlewares/validateGrupo");
 
 module.exports = {
@@ -29,10 +29,10 @@ module.exports = {
       try {
         // Activar o desactivar el permiso de mensajes en el grupo según la opción
         if (groupOn) {
-          // Aquí se usa Baileys para habilitar los permisos
+          // Usar Baileys para permitir mensajes en el grupo
           await setGroupPermissions(remoteJid, true);  // 'true' significa permitir que los miembros envíen mensajes
         } else {
-          // Y aquí para deshabilitarlos
+          // Usar Baileys para desactivar los mensajes
           await setGroupPermissions(remoteJid, false); // 'false' significa desactivar la opción
         }
 
