@@ -3,10 +3,11 @@ const fs = require("fs");
 
 const databasePath = path.resolve(__dirname, "..", "..", "database");
 
-const INACTIVE_GROUPS_FILE = "inactive-groups"; // Usamos una sola constante para los grupos inactivos
+const INACTIVE_GROUPS_FILE = "inactive-groups";
 const NOT_WELCOME_GROUPS_FILE = "not-welcome-groups";
 const INACTIVE_AUTO_RESPONDER_GROUPS_FILE = "inactive-auto-responder-groups";
 const ANTI_LINK_GROUPS_FILE = "anti-link-groups";
+const NOT_GRUPO_GROUPS_FILE = "not-grupo-groups";  // Nueva constante para grupos de tipo "grupo"
 
 function createIfNotExists(fullPath) {
   if (!fs.existsSync(fullPath)) {
@@ -32,7 +33,7 @@ function writeJSON(jsonFile, data) {
 
 // Funciones para manejar los grupos inactivos
 exports.activateGroup = (groupId) => {
-  const filename = INACTIVE_GROUPS_FILE;  // Usamos la constante única para grupos inactivos
+  const filename = INACTIVE_GROUPS_FILE;
 
   const inactiveGroups = readJSON(filename);
 
@@ -48,7 +49,7 @@ exports.activateGroup = (groupId) => {
 };
 
 exports.deactivateGroup = (groupId) => {
-  const filename = INACTIVE_GROUPS_FILE;  // Usamos la constante única para grupos inactivos
+  const filename = INACTIVE_GROUPS_FILE;
 
   const inactiveGroups = readJSON(filename);
 
@@ -60,7 +61,7 @@ exports.deactivateGroup = (groupId) => {
 };
 
 exports.isActiveGroup = (groupId) => {
-  const filename = INACTIVE_GROUPS_FILE;  // Usamos la constante única para grupos inactivos
+  const filename = INACTIVE_GROUPS_FILE;
 
   const inactiveGroups = readJSON(filename);
 
@@ -102,6 +103,43 @@ exports.isActiveWelcomeGroup = (groupId) => {
   const notWelcomeGroups = readJSON(filename);
 
   return !notWelcomeGroups.includes(groupId);
+};
+
+// Funciones para manejar los grupos de tipo "grupo"
+exports.activateGrupoGroup = (groupId) => {
+  const filename = NOT_GRUPO_GROUPS_FILE;
+
+  const notGrupoGroups = readJSON(filename);
+
+  const index = notGrupoGroups.indexOf(groupId);
+
+  if (index === -1) {
+    return;
+  }
+
+  notGrupoGroups.splice(index, 1);
+
+  writeJSON(filename, notGrupoGroups);
+};
+
+exports.deactivateGrupoGroup = (groupId) => {
+  const filename = NOT_GRUPO_GROUPS_FILE;
+
+  const notGrupoGroups = readJSON(filename);
+
+  if (!notGrupoGroups.includes(groupId)) {
+    notGrupoGroups.push(groupId);
+  }
+
+  writeJSON(filename, notGrupoGroups);
+};
+
+exports.isActiveGrupoGroup = (groupId) => {
+  const filename = NOT_GRUPO_GROUPS_FILE;
+
+  const notGrupoGroups = readJSON(filename);
+
+  return !notGrupoGroups.includes(groupId);
 };
 
 // Funciones para manejar el auto-responder
