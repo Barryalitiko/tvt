@@ -1,39 +1,37 @@
 const { PREFIX } = require("../../config");
 const { InvalidParameterError } = require("../../errors/InvalidParameterError");
-const { 
-  setGroupMessagePermission, 
-  isActiveGrupoGroup 
+const {
+  activateGroupMessages,
+  deactivateGroupMessages,
+  isGroupMessagesActive
 } = require("../../utils/database");
 const validateGrupo = require("../../middlewares/validateGrupo");
 
 module.exports = {
   name: "grupo",
-  description: "Activa o desactiva la capacidad de los miembros para enviar mensajes en el grupo.",
+  description: "Activa o desactiva la posibilidad de que los miembros envíen mensajes.",
   commands: ["grupo"],
   usage: `${PREFIX}grupo (1/0)`,
 
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
-    // Validación de los parámetros
+    // Pasamos el contexto del comando al middleware para validación
     await validateGrupo({ args, remoteJid }, async () => {
-      // Determinamos si se activa o desactiva el permiso para enviar mensajes
-      const groupOn = args[0] === "1"; // Activar
-      const groupOff = args[0] === "0"; // Desactivar
+      // Si pasa la validación, procedemos con la lógica del comando
+      const groupOn = args[0] === "1";
+      const groupOff = args[0] === "0";
 
-      // Si activamos el grupo, permitimos a los miembros enviar mensajes
+      // Activar o desactivar el permiso de mensajes en el grupo según la opción
       if (groupOn) {
-        await setGroupMessagePermission(remoteJid, true);
-      } 
-      // Si desactivamos, bloqueamos la capacidad de los miembros para enviar mensajes
-      else if (groupOff) {
-        await setGroupMessagePermission(remoteJid, false);
+        activateGroupMessages(remoteJid);
+      } else {
+        deactivateGroupMessages(remoteJid);
       }
 
       await sendSuccessReact();
 
-      const context = groupOn ? "activado" : "desactivado";
+      const context = groupOn ? "permitido" : "deshabilitado";
 
-      // Responder al usuario con el estado de la acción
-      await sendReply(`👻 Krampus.bot 👻 Los miembros pueden ${context} enviar mensajes en este grupo.`);
+      await sendReply(`👻 Krampus.bot 👻 El permiso para que los miembros envíen mensajes ha sido ${context} con éxito!`);
     });
   },
 };
