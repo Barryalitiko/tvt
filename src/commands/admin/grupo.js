@@ -1,6 +1,6 @@
-const { updateGroupSettings } = require("../../services/baileys"); // Asegúrate de que la función esté definida en services/baileys.js
-const { InvalidParameterError } = require("../../errors/InvalidParameterError");
 const { PREFIX } = require("../../config");
+const { InvalidParameterError } = require("../../errors/InvalidParameterError");
+const { closeGroup, openGroup, isGroupClosed } = require("../../utils/database");
 
 module.exports = {
   name: "grupo",
