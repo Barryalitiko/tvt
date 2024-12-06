@@ -1,4 +1,3 @@
-const { default: makeWASocket } = require("@whiskeysockets/baileys");
 const { getBuffer, getRandomName } = require("../utils");
 const fs = require("fs");
 const path = require("path");
