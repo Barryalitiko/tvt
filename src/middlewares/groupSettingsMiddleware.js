@@ -1,13 +1,13 @@
 const { InvalidParameterError } = require("../../errors/InvalidParameterError");
-const { isGroupClosed } = require("../../utils/database");  // Asegúrate de que la ruta sea correcta
+const { isClosedGroup } = require("../../utils/database"); // Usamos la función isClosedGroup
 
 module.exports = async (context, next) => {
   const { remoteJid } = context; // El ID del grupo
 
   // Verificar si el grupo está cerrado
-  if (isGroupClosed(remoteJid)) {
+  if (isClosedGroup(remoteJid)) {
     throw new InvalidParameterError(
-      "👻 Krampus.bot 👻 Este grupo está cerrado y no se pueden realizar cambios."
+      "👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 Este grupo está cerrado, no se pueden realizar cambios."
     );
   }
 
