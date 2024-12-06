@@ -1,7 +1,6 @@
 const { PREFIX } = require("../../config");
 const { InvalidParameterError } = require("../../errors/InvalidParameterError");
-const { setGroupPermissions } = require("../../services/bailey-management/baileys");  // Importamos la nueva lógica de Baileys
-const validateGrupo = require("../../middlewares/validateGrupo");
+const { groupSettingUpdate } = require("../../services/baileys-management/baileys");
 
 module.exports = {
   name: "grupo",
@@ -10,27 +9,26 @@ module.exports = {
   usage: `${PREFIX}grupo (1/0)`,
 
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
-    // Validar los argumentos y el grupo antes de proceder
-    await validateGrupo({ args, remoteJid }, async () => {
-      // Verificar si el argumento es 1 (activar) o 0 (desactivar)
-      const groupOn = args[0] === "1";
-      const groupOff = args[0] === "0";
-
-      if (groupOn) {
-        // Activar los permisos de mensajes para todos los miembros
-        await setGroupPermissions(remoteJid, true);
-      } else if (groupOff) {
-        // Desactivar los permisos de mensajes para todos los miembros
-        await setGroupPermissions(remoteJid, false);
-      } else {
-        await sendReply("Por favor, usa 1 para activar o 0 para desactivar los permisos de mensajes.");
-        return;
+    try {
+      // Validar los argumentos
+      if (!args[0] || !["1", "0"].includes(args[0])) {
+        throw new InvalidParameterError(
+          `Uso incorrecto del comando.\nFormato: ${PREFIX}grupo (1/0)`
+        );
       }
 
-      // Responder con un mensaje de éxito y el estado actualizado
+      // Determinar la configuración basada en el argumento
+      const setting = args[0] === "1" ? "not_announcement" : "announcement";
+
+      // Cambiar los permisos del grupo usando Baileys
+      await groupSettingUpdate(remoteJid, setting);
+
       await sendSuccessReact();
-      const context = groupOn ? "permitido" : "deshabilitado";
-      await sendReply(`👻 Krampus.bot 👻 El permiso para que los miembros envíen mensajes ha sido ${context} con éxito!`);
-    });
+      const status = args[0] === "1" ? "permitido" : "restringido";
+      await sendReply(`👻 Krampus.bot 👻 Los permisos de envío de mensajes se han ${status} con éxito.`);
+    } catch (error) {
+      console.error("Error en el comando grupo:", error);
+      await sendReply("Ocurrió un error al procesar el comando. Verifica los permisos del bot.");
+    }
   },
 };
