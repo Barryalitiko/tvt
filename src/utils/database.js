@@ -31,43 +31,6 @@ function writeJSON(jsonFile, data) {
   fs.writeFileSync(fullPath, JSON.stringify(data));
 }
 
-// Funciones para manejar los grupos inactivos
-exports.activateGroup = (groupId) => {
-  const filename = INACTIVE_GROUPS_FILE;
-
-  const inactiveGroups = readJSON(filename);
-
-  const index = inactiveGroups.indexOf(groupId);
-
-  if (index === -1) {
-    return;
-  }
-
-  inactiveGroups.splice(index, 1);
-
-  writeJSON(filename, inactiveGroups);
-};
-
-exports.deactivateGroup = (groupId) => {
-  const filename = INACTIVE_GROUPS_FILE;
-
-  const inactiveGroups = readJSON(filename);
-
-  if (!inactiveGroups.includes(groupId)) {
-    inactiveGroups.push(groupId);
-  }
-
-  writeJSON(filename, inactiveGroups);
-};
-
-exports.isActiveGroup = (groupId) => {
-  const filename = INACTIVE_GROUPS_FILE;
-
-  const inactiveGroups = readJSON(filename);
-
-  return !inactiveGroups.includes(groupId);
-};
-
 // Funciones para manejar los grupos no bienvenidos
 exports.activateWelcomeGroup = (groupId) => {
   const filename = NOT_WELCOME_GROUPS_FILE;
