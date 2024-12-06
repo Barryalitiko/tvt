@@ -1,35 +1,17 @@
-const { WAConnection } = require('baileys');  // El nuevo Baileys para gestionar los permisos
+const makeWASocket = require("@whiskeysockets/baileys").default;
 
-let conn;
+// Configurar y exportar la función
+const sock = makeWASocket({ /* Opciones necesarias */ });
 
-// Función para establecer la conexión con el nuevo Baileys
-async function getConnection() {
-  if (!conn) {
-    conn = new WAConnection();
-    // Aquí puedes añadir la configuración y conexión, por ejemplo: conn.connect(), manejar la sesión, etc.
-    await conn.connect();
-  }
-  return conn;
-}
-
-// Función para cambiar los permisos del grupo
-async function setGroupPermissions(groupId, allowMessages) {
+async function groupSettingUpdate(groupId, setting) {
   try {
-    const connection = await getConnection();  // Obtenemos la conexión con Baileys
-    const groupMetadata = await connection.groupMetadata(groupId);  // Obtenemos los metadatos del grupo
-
-    // Establecemos el permiso según el estado (permitido o deshabilitado)
-    const permission = allowMessages ? 'admins' : 'noone';  // 'admins' permite solo a los administradores, 'noone' desactiva todos los mensajes
-
-    // Actualizamos los permisos del grupo
-    await connection.groupSettingUpdate(groupId, permission);
-    console.log(`Permiso actualizado a: ${permission}`);
+    await sock.groupSettingUpdate(groupId, setting);
   } catch (error) {
-    console.error("Error al cambiar permisos del grupo: ", error);
-    throw new Error("No se pudo cambiar los permisos del grupo.");
+    console.error("Error al cambiar configuración del grupo:", error);
+    throw error;
   }
 }
 
 module.exports = {
-  setGroupPermissions
+  groupSettingUpdate,
 };
