@@ -4,32 +4,40 @@ const { PREFIX } = require("../../config");
 
 module.exports = {
   name: "grupo",
-  description: "Actualiza la configuración del grupo",
+  description: "Abre o cierra el grupo para que los miembros puedan enviar mensajes.",
   commands: ["grupo", "configgrupo"],
-  usage: `${PREFIX}grupo (config)`,
+  usage: `${PREFIX}grupo (1/0)`, // 1 para abrir, 0 para cerrar
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
     if (!args.length) {
       throw new InvalidParameterError(
-        " 👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙴𝚜𝚌𝚛𝚒𝚋𝚎 𝚎𝚕 𝚝𝚒𝚙𝚘 𝚍𝚎 𝚌𝚘𝚗𝚏𝚒𝚐𝚞𝚛𝚊𝚌𝚒𝚘𝚗 𝚚𝚞𝚎 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊𝚜"
+        "👻 Krampus.bot 👻 Debes escribir 1 para abrir el grupo o 0 para cerrarlo."
       );
     }
 
-    const setting = args[0]; // Se espera 'announcement', 'not_announcement', 'unlocked', 'locked'
-    
-    if (!['announcement', 'not_announcement', 'unlocked', 'locked'].includes(setting)) {
+    const openGroup = args[0] === "1";
+    const closeGroup = args[0] === "0";
+
+    // Verificación de parámetros válidos (1 o 0)
+    if (!openGroup && !closeGroup) {
       throw new InvalidParameterError(
-        " 👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙿𝚊𝚛𝚊 𝚎𝚕 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 'grupo', 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊 𝚗𝚘𝚜𝚘𝚝𝚛𝚘𝚜 𝚐𝚛𝚞𝚙𝚘𝚜 𝚌𝚘𝚖𝚘 𝚏𝚊𝚖𝚒𝚕𝚒𝚊, 𝚎𝚓𝚎𝚖𝚙𝚕𝚘: 'announcement', 'not_announcement', 'unlocked' or 'locked'."
+        "👻 Krampus.bot 👻 Solo puedes usar 1 para abrir el grupo o 0 para cerrarlo."
       );
     }
 
-    // Llamada al servicio para actualizar la configuración
-    const result = await updateGroupSettings(remoteJid, setting);
+    // Actualización de la configuración del grupo (abrir o cerrar)
+    try {
+      const result = await updateGroupSettings(remoteJid, openGroup ? 'announcement' : 'not_announcement');
 
-    if (result.success) {
-      await sendSuccessReact();
-      await sendReply(`👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 La configuración del grupo ha sido actualizada a: ${setting}`);
-    } else {
-      await sendReply(`👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 Ocurrió un error al actualizar la configuración del grupo.`);
+      if (result.success) {
+        await sendSuccessReact();
+        const action = openGroup ? "abierto" : "cerrado";
+        await sendReply(`👻 Krampus.bot 👻 El grupo ha sido ${action} correctamente.`);
+      } else {
+        await sendReply("👻 Krampus.bot 👻 Ocurrió un error al actualizar la configuración del grupo.");
+      }
+    } catch (error) {
+      console.error(error);
+      await sendReply("👻 Krampus.bot 👻 No se pudo actualizar la configuración del grupo.");
     }
   },
 };
