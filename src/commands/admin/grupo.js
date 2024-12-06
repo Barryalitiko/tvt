@@ -1,43 +1,35 @@
-const { PREFIX } = require("../../config");
+const { updateGroupSettings } = require("../../services/baileys"); // Asegúrate de que la ruta sea correcta
 const { InvalidParameterError } = require("../../errors/InvalidParameterError");
-const { setGroupPermissions } = require("../../services/baileys-management/baileys");
+const { PREFIX } = require("../../config");
 
 module.exports = {
   name: "grupo",
-  description: "Activa o desactiva el envío de mensajes en el grupo",
-  commands: [
-    "grupo",
-    "group",
-  ],
-  usage: `${PREFIX}grupo (1/0)`,
+  description: "Actualiza la configuración del grupo",
+  commands: ["grupo", "configgrupo"],
+  usage: `${PREFIX}grupo (config)`,
   handle: async ({ args, sendReply, sendSuccessReact, remoteJid }) => {
     if (!args.length) {
       throw new InvalidParameterError(
-        " 👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙴𝚜𝚌𝚛𝚒𝚋𝚎 1 𝚘 0 𝚙𝚊𝚛𝚊 𝚊𝚌𝚝𝚒𝚟𝚊𝚛 𝚘 𝚍𝚎𝚜𝚊𝚌𝚝𝚒𝚟𝚊𝚛 𝚎𝚕 𝚌𝚘𝚖𝚊𝚗𝚍𝚘"
+        " 👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙴𝚜𝚌𝚛𝚒𝚋𝚎 𝚎𝚕 𝚝𝚒𝚙𝚘 𝚍𝚎 𝚌𝚘𝚗𝚏𝚒𝚐𝚞𝚛𝚊𝚌𝚒𝚘𝚗 𝚚𝚞𝚎 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊𝚜"
       );
     }
 
-    const allowMessages = args[0] === "1";
-    const blockMessages = args[0] === "0";
-
-    if (!allowMessages && !blockMessages) {
+    const setting = args[0]; // Se espera 'announcement', 'not_announcement', 'unlocked', 'locked'
+    
+    if (!['announcement', 'not_announcement', 'unlocked', 'locked'].includes(setting)) {
       throw new InvalidParameterError(
-        " 👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙴𝚜𝚌𝚛𝚒𝚋𝚎 1 𝚘 0 𝚙𝚊𝚛𝚊 𝚊𝚌𝚝𝚒𝚟𝚊𝚛 𝚘 𝚍𝚎𝚜𝚊𝚌𝚝𝚒𝚟𝚊𝚛 𝚎𝚕 𝚌𝚘𝚖𝚊𝚗𝚍𝚘"
+        " 👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙿𝚊𝚛𝚊 𝚎𝚕 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 'grupo', 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊 𝚗𝚘𝚜𝚘𝚝𝚛𝚘𝚜 𝚐𝚛𝚞𝚙𝚘𝚜 𝚌𝚘𝚖𝚘 𝚏𝚊𝚖𝚒𝚕𝚒𝚊, 𝚎𝚓𝚎𝚖𝚙𝚕𝚘: 'announcement', 'not_announcement', 'unlocked' or 'locked'."
       );
     }
 
-    if (allowMessages) {
-      // Si se permite que todos los miembros envíen mensajes
-      await setGroupPermissions(remoteJid, true);
+    // Llamada al servicio para actualizar la configuración
+    const result = await updateGroupSettings(remoteJid, setting);
+
+    if (result.success) {
+      await sendSuccessReact();
+      await sendReply(`👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 La configuración del grupo ha sido actualizada a: ${setting}`);
     } else {
-      // Si se desactiva para que solo los administradores envíen mensajes
-      await setGroupPermissions(remoteJid, false);
+      await sendReply(`👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 Ocurrió un error al actualizar la configuración del grupo.`);
     }
-
-    await sendSuccessReact();
-
-    const context = allowMessages ? "*Permitido para todos*" : "*Solo administradores*";
-
-    await sendReply(`👻 𝙺𝚛𝚊𝚖𝚙𝚞𝚜.𝚋𝚘𝚝 👻 𝙻𝚘𝚜 𝚙𝚎𝚛𝚖𝚒𝚜𝚘𝚜 𝚍𝚎 𝚎𝚗𝚟𝚒𝚘 𝚍𝚎 𝚖𝚎𝚗𝚜𝚊𝚓𝚎𝚜 𝚎𝚗 𝚎𝚕 𝚐𝚛𝚞𝚙𝚘 𝚑𝚊𝚗 𝚜𝚒𝚍𝚘 ${context}`);
   },
 };
