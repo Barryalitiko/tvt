@@ -1,4 +1,4 @@
-const { InvalidParameterError } = require("../../errors/InvalidParameterError");
+const { InvalidParameterError } = require("../../errors/InvalidParameterError")
 const { isClosedGroup } = require("../../utils/database"); // Usamos la función isClosedGroup
 
 module.exports = async (context, next) => {
