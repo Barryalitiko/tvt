@@ -1,6 +1,6 @@
 const { PREFIX } = require("../../config");
 const { InvalidParameterError } = require("../../errors/InvalidParameterError");
-const { closeGroup, openGroup, isGroupClosed } = require("../../utils/database");
+const { updateGroupSettings } = require("../../utils/database");
 
 module.exports = {
   name: "grupo",
@@ -16,11 +16,10 @@ module.exports = {
     }
 
     // Determinar si se debe abrir o cerrar el grupo
-    const openGroup = args[0] === "1";
-    const closeGroup = args[0] === "0";
+    const action = args[0] === "1" ? "open" : args[0] === "0" ? "close" : null;
 
     // Validar los parámetros (solo se aceptan 1 o 0)
-    if (!openGroup && !closeGroup) {
+    if (!action) {
       throw new InvalidParameterError(
         "👻 Krampus.bot 👻 Solo puedes usar 1 para abrir el grupo o 0 para cerrarlo."
       );
@@ -28,25 +27,19 @@ module.exports = {
 
     try {
       // Actualizar la configuración del grupo
-      const result = await updateGroupSettings(
-        remoteJid,
-        openGroup ? "not_announcement" : "announcement"
-      );
+      const result = await updateGroupSettings(remoteJid, action === "open" ? "not_announcement" : "announcement");
 
       if (result.success) {
         await sendSuccessReact();
-        const action = openGroup ? "abierto" : "cerrado";
-        await sendReply(`👻 Krampus.bot 👻 El grupo ha sido ${action} correctamente.`);
+        const actionText = action === "open" ? "🔓 Abierto" : "🔒 Cerrado";
+        await sendReply(`👻 Krampus.bot 👻 El grupo ha sido ${actionText} correctamente.`);
       } else {
-        await sendReply(
-          "👻 Krampus.bot 👻 Hubo un problema al actualizar la configuración del grupo."
-        );
+        await sendReply("👻 Krampus.bot 👻 Hubo un problema al actualizar la configuración del grupo.");
       }
     } catch (error) {
       console.error(error);
-      await sendReply(
-        "👻 Krampus.bot 👻 No se pudo actualizar la configuración del grupo. Inténtalo de nuevo más tarde."
-      );
+      await sendReply("👻 Krampus.bot 👻 No se pudo actualizar la configuración del grupo. Inténtalo de nuevo más tarde.");
     }
   },
 };
+
