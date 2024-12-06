@@ -1,8 +1,15 @@
+const { default: makeWASocket } = require("@whiskeysockets/baileys");
 const { getBuffer, getRandomName } = require("../utils");
 const fs = require("fs");
 const path = require("path");
 const { TEMP_DIR, ASSETS_DIR } = require("../config");
 
+/**
+ * Obtiene la imagen de perfil de un usuario.
+ * @param {Object} socket - La instancia del socket de Baileys.
+ * @param {string} userJid - El JID del usuario.
+ * @returns {Object} Datos de la imagen de perfil (buffer y ruta de archivo).
+ */
 exports.getProfileImageData = async (socket, userJid) => {
   let profileImage = "";
   let buffer = null;
@@ -24,17 +31,22 @@ exports.getProfileImageData = async (socket, userJid) => {
   return { buffer, profileImage, success };
 };
 
-exports.updateGroupSettings = async (socket, groupJid) => {
+/**
+ * Actualiza la configuración del grupo para abrir o cerrar el grupo.
+ * @param {string} remoteJid - El ID del grupo.
+ * @param {string} setting - "announcement" para cerrar el grupo, "not_announcement" para abrirlo.
+ * @returns {Object} Resultado de la operación.
+ */
+exports.updateGroupSettings = async (remoteJid, setting) => {
   try {
-    // Cambiar la configuración del grupo (se puede elegir entre los valores disponibles)
-    await socket.groupSettingUpdate(groupJid, 'announcement'); // Solo permitir que los administradores envíen mensajes
-    // await socket.groupSettingUpdate(groupJid, 'not_announcement'); // Permitir que todos envíen mensajes
-    // await socket.groupSettingUpdate(groupJid, 'unlocked'); // Permitir que todos modifiquen la configuración del grupo
-    // await socket.groupSettingUpdate(groupJid, 'locked'); // Solo permitir que los administradores modifiquen la configuración del grupo
+    // Crea una instancia del socket de Baileys
+    const socket = makeWASocket();
 
-    return { success: true }; // Retorna un objeto con éxito
+    // Actualiza la configuración del grupo
+    await socket.groupSettingUpdate(remoteJid, setting);
+    return { success: true };
   } catch (error) {
     console.error("Error al actualizar la configuración del grupo:", error);
-    return { success: false, error: error.message }; // Retorna un objeto con el error
+    return { success: false, error: error.message };
   }
 };
